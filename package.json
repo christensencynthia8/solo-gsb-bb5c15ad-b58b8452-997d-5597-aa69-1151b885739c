@@ -1,0 +1,13 @@
+{
+  "name": "rehearsal-cue-sheet",
+  "version": "1.0.0",
+  "private": true,
+  "description": "小剧场排练用演出提示单（Express + 原生前端 + 本地 JSON 存储）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

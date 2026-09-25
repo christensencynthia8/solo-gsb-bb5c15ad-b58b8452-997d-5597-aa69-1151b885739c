@@ -1,0 +1,16 @@
+services:
+  cue-sheet:
+    build: .
+    container_name: rehearsal-cue-sheet
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      # 数据文件路径（容器内），挂载命名卷以持久化
+      - DATA_FILE=/app/data/cues.json
+    volumes:
+      - cue-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  cue-data:

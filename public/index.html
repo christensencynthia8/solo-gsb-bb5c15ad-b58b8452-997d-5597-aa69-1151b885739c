@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>演出提示单 · 小剧场排练</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎭 演出提示单 <small>小剧场排练</small></h1>
+    <div id="msg" class="msg" hidden></div>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>时间轴 <span class="hint">同一通道上的重叠时段以红色标出（左闭右开，首尾相接不算冲突；冲突可保留供排练调整）</span></h2>
+      <div id="timeline" class="timeline"></div>
+      <div id="conflict-summary" class="conflict-summary"></div>
+    </section>
+
+    <section class="card">
+      <h2>新增提示</h2>
+      <form id="add-form" class="cue-form">
+        <label>名称 <input name="name" required placeholder="如：第二幕灯光"></label>
+        <label>设备通道 <input name="channel" required placeholder="如：灯光 / 音响 / 机械" list="channel-list"></label>
+        <label>持续秒数 <input name="duration" type="number" min="0.1" step="any" required placeholder="30"></label>
+        <label>开始方式
+          <select name="startType">
+            <option value="fixed">固定演出秒数</option>
+            <option value="after">跟随提示结束后</option>
+          </select>
+        </label>
+        <label class="when-fixed">开始秒数 <input name="seconds" type="number" min="0" step="any" value="0"></label>
+        <label class="when-after" hidden>跟随提示 <select name="cueId"></select></label>
+        <label class="when-after" hidden>延迟秒数 <input name="delay" type="number" min="0" step="any" value="0"></label>
+        <button type="submit">新增</button>
+      </form>
+      <datalist id="channel-list"></datalist>
+    </section>
+
+    <section class="card">
+      <h2>提示列表 <span class="hint">修改后点击「保存」立即重算全部后继提示</span></h2>
+      <div class="table-wrap">
+        <table id="cue-table">
+          <thead>
+            <tr>
+              <th>名称</th>
+              <th>通道</th>
+              <th>持续(秒)</th>
+              <th>开始方式</th>
+              <th>参数</th>
+              <th>计算开始</th>
+              <th>计算结束</th>
+              <th>状态</th>
+              <th>操作</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
